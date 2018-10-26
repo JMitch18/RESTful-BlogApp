@@ -21,7 +21,12 @@ const blogSchema = new mongoose.Schema({
 });
 
 // Blog model configuration
-const blog = mongoose.model("Blog", blogSchema);
+const Blog = mongoose.model("Blog", blogSchema);
+
+// RESTFUL ROUTES
+app.get("/blogs", (req, res) => {
+  res.render("index.ejs");
+});
 
 //Port
 app.listen(3000, () => {
