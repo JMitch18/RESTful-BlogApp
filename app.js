@@ -24,11 +24,20 @@ const blogSchema = new mongoose.Schema({
 const Blog = mongoose.model("Blog", blogSchema);
 
 // RESTFUL ROUTES
+app.get("/", (req, res) => {
+  res.redirect("/blogs");
+});
 app.get("/blogs", (req, res) => {
-  res.render("index.ejs");
+  Blog.find({}, (err, blogs) => {
+    if (err) {
+      console.log("Something went wrong!");
+    } else {
+      res.render("index.ejs", { blogs: blogs });
+    }
+  });
 });
 
-//Port
+// Port
 app.listen(3000, () => {
   console.log("Listening on port 3000....");
 });
