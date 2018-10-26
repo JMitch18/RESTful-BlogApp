@@ -13,3 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // image
 // body
 // created
+
+//Port
+app.listen(3000, () => {
+  console.log("Listening on port 3000....");
+});
