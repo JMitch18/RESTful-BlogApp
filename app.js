@@ -3,7 +3,7 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose");
 
-// Setting up Mongoose
+// App configuration
 mongoose.connect(
   "mongodb://localhost/restFul_blog_app",
   { useNewUrlParser: true }
@@ -12,10 +12,16 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// title
-// image
-// body
-// created
+// Moongoose configuration
+const blogSchema = new mongoose.Schema({
+  title: String,
+  image: String,
+  body: String,
+  created: { type: Date, default: Date.now }
+});
+
+// Blog model configuration
+const blog = mongoose.model("Blog", blogSchema);
 
 //Port
 app.listen(3000, () => {
