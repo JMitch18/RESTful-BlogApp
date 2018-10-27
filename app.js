@@ -56,6 +56,17 @@ app.post("/blogs", (req, res) => {
     }
   });
 });
+
+// SHOW ROUTE
+app.get("/blogs/:id", (req, res) => {
+  Blog.findById(req.params.id, (err, foundBlog) => {
+    if (err) {
+      res.redirect("/blogs");
+    } else {
+      res.render("show", { blog: foundBlog });
+    }
+  });
+});
 // Port
 app.listen(3000, () => {
   console.log("Listening on port 3000....");
