@@ -3,6 +3,7 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   mongoose = require("mongoose");
 methodOverride = require("method-override");
+expressSanitizer = require("express-sanitizer");
 
 // App configuration
 mongoose.connect(
