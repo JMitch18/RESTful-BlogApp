@@ -13,6 +13,7 @@ mongoose.connect(
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 
 // Moongoose configuration
@@ -50,6 +51,10 @@ app.get("/blogs/new", (req, res) => {
 // CREATE ROUTE
 app.post("/blogs", (req, res) => {
   //creating the blog
+
+  //sanitize
+  req.body.blog.body = req.sanitize();
+
   Blog.create(req.body.blog, (err, newBlog) => {
     if (err) {
       res.render("new");
@@ -84,6 +89,8 @@ app.get("/blogs/:id/edit", (req, res) => {
 
 // UPDATE ROUTE
 app.put("/blogs/:id", (req, res) => {
+  //sanitize
+  req.body.blog.body = req.sanitize();
   //Blog.findByIdAndUpdate(id, newData, callback)
   Blog.findByIdAndUpdate(req.params.id, req.body.blog, (err, updatedBlog) => {
     if (err) {
